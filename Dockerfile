@@ -43,15 +43,8 @@ RUN apt update && apt install -y --no-install-recommends \
 
 ENV PATH /usr/lib/llvm-6.0/bin:$PATH
 
-# Install rtags
-RUN git clone --recursive https://github.com/Andersbakken/rtags.git && cd rtags \
-    && mkdir build && cd build \
-    && cmake .. -DSKIP_CTEST=True -DLIBCLANG_LLVM_CONFIG_EXECUTABLE=/usr/lib/llvm-6.0/bin/llvm-config \
-    && make -j4 \
-    && make install \
-    && cd / && rm -rf rtags \
-    # Install ccls
-    && git clone https://github.com/MaskRay/ccls --depth=1 \
+# Install ccls
+RUN git clone https://github.com/MaskRay/ccls --depth=1 \
     && cd ccls \
     && git submodule update --init \
     && cmake -H. -BRelease -DCMAKE_CXX_COMPILER=/usr/lib/llvm-6.0/bin/clang++ -DSYSTEM_CLANG=ON \
