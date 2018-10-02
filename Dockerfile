@@ -39,11 +39,7 @@ RUN apt update && apt install -y --no-install-recommends \
     lld-6.0 \
     && rm -rf /var/lib/apt/lists/* \
     && update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 60 --slave /usr/bin/g++ g++ /usr/bin/g++-7 \
-    && update-alternatives --config gcc \
-    # Install ripgrep
-    && wget https://github.com/BurntSushi/ripgrep/releases/download/0.10.0/ripgrep_0.10.0_amd64.deb \
-    && dpkg -i ripgrep_0.10.0_amd64.deb \
-    && rm ripgrep_0.10.0_amd64.deb
+    && update-alternatives --config gcc
 
 ENV PATH /usr/lib/llvm-6.0/bin:$PATH
 
